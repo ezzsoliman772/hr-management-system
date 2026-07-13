@@ -181,7 +181,7 @@ Employee Balance Updated
 
 ## Login
 
-![Login](screenshots/login.png)
+![Landing page](landing page.png)
 
 ---
 
