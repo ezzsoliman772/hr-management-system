@@ -1,36 +1,170 @@
 # HR Leave Management System
 
-A modern HR Leave Management System built with **Laravel 12** that allows employees to submit leave requests and enables HR administrators to review, approve, or reject them while automatically managing leave balances.
+> A modern HR Leave Management System built with **Laravel 12** that streamlines employee leave requests and HR approval workflows.
+
+![Laravel](https://img.shields.io/badge/Laravel-12-red)
+![PHP](https://img.shields.io/badge/PHP-8.2-blue)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-38BDF8)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
-## Features
+## 📖 About
 
-### Employee Panel
+This project is a mini HR Leave Management System developed using **Laravel 12** following a clean layered architecture.
+
+It provides two separate dashboards:
+
+- Employee Dashboard
+- Admin Dashboard
+
+Employees can submit leave requests and track their status, while administrators can review, approve, reject requests, and manage employee leave balances.
+
+---
+
+# ✨ Features
+
+## 👨‍💼 Employee Panel
 
 - Secure Authentication
 - Dashboard Overview
-- View Annual Leave Allowance
-- View Remaining Leave Balance
-- Submit Leave Requests
+- Annual Leave Balance
+- Remaining Leave Balance
+- Submit Leave Request
 - Request History
-- Filter Requests by Status
-- Responsive Dashboard
-
-### Admin Panel
-
-- Dashboard Overview
-- View All Leave Requests
-- Search Leave Requests
 - Filter Requests
-- Approve / Reject Requests
-- Employee Management
-- Update Employee Leave Balance
-- Automatic Leave Balance Deduction After Approval
+- Responsive UI
 
 ---
 
-## Built With
+## 👨‍💻 Admin Panel
+
+- Dashboard Overview
+- View All Leave Requests
+- Search Requests
+- Filter by Status
+- Approve Requests
+- Reject Requests
+- Employee Management
+- Update Employee Leave Balance
+
+---
+
+# 🏗 Project Architecture
+
+The project follows a layered architecture to separate responsibilities.
+
+```
+Controller
+        │
+        ▼
+Form Request
+        │
+        ▼
+Service Layer
+        │
+        ▼
+Model
+        │
+        ▼
+Database
+```
+
+### Layers
+
+- Controllers
+- Form Requests
+- Services
+- Models
+- Blade Components
+- Middleware
+
+---
+
+# 📂 Folder Structure
+
+```text
+app
+├── Http
+│   ├── Controllers
+│   │   ├── Admin
+│   │   ├── Employee
+│   │   └── Auth
+│   ├── Middleware
+│   └── Requests
+│
+├── Models
+├── Services
+│
+resources
+├── views
+│   ├── admin
+│   ├── employee
+│   ├── auth
+│   ├── layouts
+│   └── components
+```
+
+---
+
+# 🗄 Database
+
+## Users
+
+| Column | Description |
+|----------|-------------|
+| id | User ID |
+| name | Employee Name |
+| email | Email |
+| password | Password |
+| role | Admin / Employee |
+| annual_leave_allowance | Annual Leave |
+| annual_leave_balance | Remaining Balance |
+
+---
+
+## Leave Requests
+
+| Column | Description |
+|----------|-------------|
+| id | Request ID |
+| user_id | Employee |
+| start_date | Leave Start |
+| end_date | Leave End |
+| days | Total Days |
+| reason | Leave Reason |
+| status | Pending / Approved / Rejected |
+
+---
+
+# 🔄 Business Flow
+
+Employee
+
+```
+Login
+    ↓
+Dashboard
+    ↓
+Create Leave Request
+    ↓
+Pending
+```
+
+Admin
+
+```
+View Requests
+      ↓
+Approve / Reject
+      ↓
+Employee Balance Updated
+```
+
+---
+
+# 🛠 Tech Stack
 
 - Laravel 12
 - PHP 8.2
@@ -38,93 +172,58 @@ A modern HR Leave Management System built with **Laravel 12** that allows employ
 - Blade
 - Tailwind CSS
 - Laravel Breeze
-- Service Layer Architecture
+- Service Layer Pattern
 - Form Request Validation
 
 ---
 
-## Project Structure
+# 📸 Screenshots
 
-```
-app
-├── Http
-│   ├── Controllers
-│   ├── Middleware
-│   └── Requests
-├── Models
-├── Services
-└── Providers
+## Login
 
-resources
-├── views
-│   ├── admin
-│   ├── employee
-│   ├── auth
-│   └── components
-```
+![Login](screenshots/login.png)
 
 ---
 
-## Database
+## Employee Dashboard
 
-### Users
-
-| Column | Description |
-|---------|-------------|
-| name | Employee Name |
-| email | Email Address |
-| password | Password |
-| role | admin / employee |
-| annual_leave_allowance | Total Annual Leave |
-| annual_leave_balance | Remaining Leave |
-
-### Leave Requests
-
-| Column | Description |
-|---------|-------------|
-| user_id | Employee |
-| start_date | Leave Start |
-| end_date | Leave End |
-| days | Total Days |
-| reason | Leave Reason |
-| status | pending / approved / rejected |
+![Dashboard](screenshots/employee-dashboard.png)
 
 ---
 
-## Business Logic
+## New Leave Request
 
-### Employee
-
-- Submit Leave Request
-- Cannot request more than remaining balance
-- View request history
-- Track request status
-
-### Admin
-
-- Review all requests
-- Search requests
-- Filter requests
-- Approve requests
-- Reject requests
-- Update employee leave allowance
-
-When a request is approved:
-
-- Leave status changes to **Approved**
-- Employee remaining balance is updated automatically
+![Create](screenshots/new-request.png)
 
 ---
 
-## Installation
+## Request History
 
-Clone the project
+![History](screenshots/history.png)
+
+---
+
+## Admin Dashboard
+
+![Admin](screenshots/admin-dashboard.png)
+
+---
+
+## Employee Management
+
+![Employees](screenshots/employees.png)
+
+---
+
+# 🚀 Installation
+
+Clone repository
 
 ```bash
 git clone https://github.com/ezzsoliman772/hr-management-system.git
 ```
 
-Install dependencies
+Install packages
 
 ```bash
 composer install
@@ -134,13 +233,13 @@ composer install
 npm install
 ```
 
-Create environment file
+Copy environment
 
 ```bash
 cp .env.example .env
 ```
 
-Generate application key
+Generate key
 
 ```bash
 php artisan key:generate
@@ -158,7 +257,11 @@ Run migrations
 php artisan migrate
 ```
 
-Start server
+Run application
+
+```bash
+npm run dev
+```
 
 ```bash
 php artisan serve
@@ -166,47 +269,48 @@ php artisan serve
 
 ---
 
-## Screenshots
+# 👥 Demo Accounts
 
-### Login
+## Employee
 
-(Add screenshot)
+```
+Email:
+employee@example.com
 
-### Employee Dashboard
-
-(Add screenshot)
-
-### Submit Leave Request
-
-(Add screenshot)
-
-### Request History
-
-(Add screenshot)
-
-### Admin Dashboard
-
-(Add screenshot)
-
-### Employee Management
-
-(Add screenshot)
+Password:
+password
+```
 
 ---
 
-## Future Improvements
+## Admin
+
+```
+Email:
+admin@example.com
+
+Password:
+password
+```
+
+> Update these credentials according to your seeded database.
+
+---
+
+# 📌 Future Improvements
 
 - REST API
 - Swagger Documentation
 - Email Notifications
 - Leave Types
 - Calendar Integration
-- Unit Tests
+- Unit Testing
 - Docker Support
+- CI/CD Pipeline
 
 ---
 
-## Author
+# 👨‍💻 Author
 
 **Ezz Soliman**
 
@@ -214,3 +318,7 @@ Laravel Backend Developer
 
 GitHub:
 https://github.com/ezzsoliman772
+
+---
+
+⭐ If you like this project, consider giving it a star.
